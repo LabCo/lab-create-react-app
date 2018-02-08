@@ -51,7 +51,6 @@ const postCSSLoaderOptions = {
 module.exports = {
   // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
   // See the discussion in https://github.com/facebook/create-react-app/issues/343.
-  devtool: 'cheap-module-source-map',
   // These are the "entry points" to our application.
   // This means they will be the "root" imports that are included in JS bundle.
   // The first two entry points enable "hot" CSS and auto-refreshes for JS.
@@ -191,7 +190,10 @@ module.exports = {
                   // @remove-on-eject-begin
                   babelrc: false,
                   // @remove-on-eject-end
-                  presets: [require.resolve('babel-preset-react-app')],
+                  presets: [
+                    require.resolve('babel-preset-react-app'),
+                    require.resolve('@babel/preset-stage-0'),
+                  ],
                   plugins: [
                     [
                       require.resolve('babel-plugin-named-asset-import'),
@@ -228,6 +230,7 @@ module.exports = {
                   compact: false,
                   presets: [
                     require.resolve('babel-preset-react-app/dependencies'),
+                    require.resolve('@babel/preset-stage-0'),
                   ],
                   cacheDirectory: true,
                   highlightCode: true,
@@ -235,6 +238,57 @@ module.exports = {
               },
             ],
           },
+          // // sass loader
+          // {
+          //   test: /\.module.s[ac]ss$/,
+          //   use: [
+          //     require.resolve('style-loader'),
+          //     {
+          //       loader: require.resolve('css-loader'),
+          //       options: {
+          //         modules: true,
+          //         localIdentName: '[sha512:hash:base32]-[name]-[local]',
+          //         importLoaders: 1,
+          //         sourceMap: true
+          //       }
+          //     },
+          //     {
+          //       loader: require.resolve('postcss-loader'),
+          //       options: postCSSLoaderOptions,
+          //     },
+          //     {
+          //       loader: require.resolve('sass-loader'),
+          //       options: {
+          //         sourceMap: true
+          //       }
+          //     }
+          //   ]
+          // },
+          // {
+          //   test: /\.s[ac]ss$/,
+          //   exclude: /\.module\.s[ac]ss$/,
+          //   use: [
+          //     require.resolve('style-loader'),
+          //     {
+          //       loader: require.resolve('css-loader'),
+          //       options: {
+          //         importLoaders: 1,
+          //         sourceMap: true
+          //       }
+          //     },
+          //     {
+          //       loader: require.resolve('postcss-loader'),
+          //       options: postCSSLoaderOptions,
+          //     },
+          //     {
+          //       loader: require.resolve('sass-loader'),
+          //       options: {
+          //         sourceMap: true
+          //       }
+          //     }
+          //   ]
+          // },
+
           // "postcss" loader applies autoprefixer to our CSS.
           // "css" loader resolves paths in CSS and adds assets as dependencies.
           // "style" loader turns CSS into JS modules that inject <style> tags.
